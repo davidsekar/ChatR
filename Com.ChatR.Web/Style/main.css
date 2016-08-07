@@ -1,0 +1,76 @@
+﻿body {
+}
+
+.messagesDiv {
+    width: 400px;
+    height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: block;
+    float: left;
+    border-radius:10px;
+    border:1px solid black;
+    margin:15px;
+}
+
+.serverMessage {
+    display: block;
+    float: left;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #3c8dbc;
+    border-radius: 10px;
+    background-color: #3c8dbc;
+    color: white;
+}
+
+.serverUserName {
+    display: block;
+    float: left;
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #3c8dbc;
+    border-radius: 12px;
+    background-color: #3c8dbc;
+    color: white;
+}
+
+.clientMessage {
+    display: block;
+    float: right;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #dd4b39;
+    border-radius: 12px;
+    background-color: #dd4b39;
+    color: white;
+}
+
+.clientUserName {
+    display: block;
+    float: right;
+    padding: 5px;
+    margin: 5px;
+    margin-right: 25px;
+    border: 1px solid #dd4b39;
+    border-radius: 12px;
+    background-color: #dd4b39;
+    color: white;
+}
+
+.chatItem {
+    display: block;
+    width: 400px;
+    margin: 5px;
+    overflow: hidden;
+}
+
+.userItem {
+    display: block;
+    padding: 4px;
+    margin: 4px;
+    border-radius: 5px;
+    background-color: darkgreen;
+    color: white;
+    text-align: center;
+}
