@@ -1,45 +1,32 @@
-// Include gulp
-var gulp = require('gulp');
+﻿'use strict';
 
-// Include Our Plugins
-var jshint = require('gulp-jshint');
-var concat = require('gulp-concat');
-var babel = require('gulp-babel');
-var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
+var sassPath = "./style/**/*.scss";
+var cssPath = "./style";
 
-//transpile ES6 into ES5
-gulp.task('scripts', function () {
-	return gulp.src([
-			'Scripts/React/Components/ChatItem.jsx',
-			'Scripts/React/Components/ChatInitialization.jsx',
-			'Scripts/React/Components/UserList.jsx',
-			'Scripts/React/Components/ChatWindow.jsx',
-			'Scripts/React/Components/MainChat.jsx',
-			'Scripts/React/Components/Render.jsx',
-		])
-		.pipe(babel({
-			presets: ['react', 'es2015']
-		}))
-		.pipe(concat('components.js'))
-		.pipe(jshint())
-		.pipe(rename('components.min.js'))
-		//.pipe(uglify())
-		.pipe(gulp.dest('Scripts/React/Components'));
+var gulp = require("gulp");
+var sass = require("gulp-sass");
+var autoprefixer = require('gulp-autoprefixer');
+var sourcemaps = require('gulp-sourcemaps');
+var plumber = require('gulp-plumber');
+var notify = require("gulp-notify");
+
+gulp.task('CopyDep', function () {
+    var depSrc = ["./node_modules/react-draggable/dist/*.*"];
+
+    gulp.src(depSrc).pipe(gulp.dest("./Scripts/external"));
 });
 
-// Watch Files For Changes
-gulp.task('watch', function ()
-{
-	gulp.watch([
-			'Scripts/React/Components/ChatItem.jsx',
-			'Scripts/React/Components/ChatInitialization.jsx',
-			'Scripts/React/Components/UserList.jsx',
-			'Scripts/React/Components/ChatWindow.jsx',
-			'Scripts/React/Components/MainChat.jsx',
-			'Scripts/React/Components/Render.jsx',
-		], ['scripts']);
+
+gulp.task('sass', function () {
+    gulp.src(sassPath)
+    .pipe(plumber({ errorHandler: notify.onError("Error: <%=error.message %>") }))
+    .pipe(sourcemaps.init())
+    .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+    .pipe(autoprefixer({ browsers: ['> 1%', 'IE 8'], cascade: false }))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(cssPath));
 });
 
-// Default Task
-gulp.task('default', ['scripts', 'watch']);
+gulp.task('watch', function () {
+    gulp.watch(sassPath, ['sass']);
+});

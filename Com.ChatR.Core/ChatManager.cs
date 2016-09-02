@@ -4,6 +4,7 @@
     using Dtos;
     using Models;
     using Repository;
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     public class ChatManager
@@ -19,6 +20,7 @@
         public async Task<ChatRoomDto> CreateChatRoom(ChatRoomDto room)
         {
             var cRoom = _mapper.Map<ChatRoom>(room);
+            cRoom.Id = Guid.NewGuid();
             bool result = await _repo.AddRoom(cRoom);
 
             if (result)

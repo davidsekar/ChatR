@@ -13,5 +13,6 @@ namespace Com.ChatR.MsSqlProvider
         public virtual DbSet<ChatRoom> ChatRooms { get; set; }
         public virtual DbSet<ChatParticipant> ChatParticipants { get; set; }
         public virtual DbSet<ChatMessage> ChatMessages { get; set; }
+        public virtual DbSet<ChatUser> ChatUsers { get; set; }
     }
 }

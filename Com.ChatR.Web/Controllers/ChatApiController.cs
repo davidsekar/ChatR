@@ -3,6 +3,7 @@
     using Core;
     using Core.Dtos;
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Http;
     public class ChatApiController : ApiController
@@ -40,7 +41,12 @@
         {
             try
             {
-                return Ok(await _chatManager.GetAllChatRooms());
+                List<ChatRoomDto> rooms = await _chatManager.GetAllChatRooms();
+                if (rooms.Count < 1)
+                {
+                    rooms.Add(new ChatRoomDto() { Id = Guid.NewGuid(), IsPrivate = false, Name = "Test", SecretKey = "XXX" });
+                }
+                return Ok(rooms);
             }
             catch (Exception ex)
             {

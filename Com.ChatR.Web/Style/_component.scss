@@ -1,0 +1,32 @@
+﻿.error-message {
+    color: red;
+    font-style: italic;
+}
+
+a {
+    color: white !important;
+}
+
+.label, .field{
+    width:50%;
+}
+
+.field input{
+    max-width:100%;
+}
+
+
+.btn{
+    display:inline-block;
+    padding:10px;
+    text-decoration:none;
+    border-radius:5px;
+    border:1px solid #fff;
+    margin:5px;
+    text-transform:uppercase;
+    font-size:10px;
+
+    &:hover{
+        background-color:aquamarine;
+    }
+}

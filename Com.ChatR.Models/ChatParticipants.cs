@@ -16,5 +16,8 @@ namespace Com.ChatR.Models
 
         [ForeignKey("RoomId")]
         public ChatRoom ChatRoom { get; set; }
+
+        [Required]
+        public Guid UserId { get; set; }
     }
 }

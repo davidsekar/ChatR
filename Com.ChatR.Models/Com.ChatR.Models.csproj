@@ -52,6 +52,7 @@
     <Compile Include="ChatMessages.cs" />
     <Compile Include="ChatParticipants.cs" />
     <Compile Include="ChatRooms.cs" />
+    <Compile Include="ChatUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

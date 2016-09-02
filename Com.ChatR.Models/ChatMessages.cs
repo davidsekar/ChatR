@@ -13,8 +13,6 @@ namespace Com.ChatR.Models
         public DateTime Time { get; set; }
 
         public Guid RoomId { get; set; }
-        [ForeignKey("RoomId")]
-        public ChatRoom Room { get; set; }
 
         public Guid ParticipantId { get; set; }
         [ForeignKey("ParticipantId")]

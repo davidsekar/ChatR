@@ -1,5 +1,4 @@
 ﻿var ChatItem = React.createClass({
-    
     render: function () {
         var itemStyle = 'chatItem';
         var userNameStyle = (this.props.source === 'client') ? 'clientUserName' : 'serverUserName';

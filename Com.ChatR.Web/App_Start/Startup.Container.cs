@@ -3,6 +3,9 @@ using Autofac.Integration.Mvc;
 using Autofac.Integration.SignalR;
 using Autofac.Integration.WebApi;
 using AutoMapper;
+using Com.ChatR.Core;
+using Com.ChatR.MsSqlProvider;
+using Com.ChatR.Repository;
 using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json.Serialization;
 using Owin;
@@ -75,7 +78,10 @@ namespace Com.ChatR.Web
 
         private static void RegisterTypes(ContainerBuilder builder, Assembly[] assemblies)
         {
-            //builder.RegisterType(ChatModel)
+            builder.RegisterType<ChatDataManager>().As<IChatRepository>().InstancePerRequest();
+            builder.RegisterType<ChatManager>().AsSelf().InstancePerRequest();
+            builder.RegisterType<ChatModel>().AsSelf().InstancePerRequest();
+            builder.RegisterType<UserAccountManager>().AsSelf().InstancePerRequest();
         }
 
         private static void RegisterServices(ContainerBuilder builder)

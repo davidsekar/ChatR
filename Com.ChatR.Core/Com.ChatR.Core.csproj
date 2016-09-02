@@ -56,11 +56,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UserAccountManager.cs" />
     <Compile Include="ChatManager.cs" />
     <Compile Include="ChatRHub.cs" />
     <Compile Include="Dtos\ChatMessageDto.cs" />
     <Compile Include="Dtos\ChatParticipantDto.cs" />
     <Compile Include="Dtos\ChatRoomDto.cs" />
+    <Compile Include="PasswordStorage.cs" />
     <Compile Include="MapsProfiles\ChatRMappings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
