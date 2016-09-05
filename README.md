@@ -3,7 +3,7 @@ Realtime chat application developed on ASP.Net platform using SignalR. This proj
 
 1. SignalR
 
-2. ReactJs
+2. ReactJs (JSX format)
 
 3. StoreJS
 
@@ -11,5 +11,5 @@ Realtime chat application developed on ASP.Net platform using SignalR. This proj
  
 # Development dependencies
 
-Styles for this repo is written in SCSS and the JavaScripts using typescript.
+Css styles for this repo are written in SCSS and the JavaScripts using typescript.
 
