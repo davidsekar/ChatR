@@ -1,5 +1,7 @@
 ﻿/// <reference path="createroom.tsx" />
 
+var ProgressBar = ReactProgressBarPlus as any;
+
 class MainChat extends React.Component<IMainChatProps, IAppState> {
     constructor(props: IMainChatProps) {
         super(props);
@@ -8,7 +10,8 @@ class MainChat extends React.Component<IMainChatProps, IAppState> {
             UserLoggedIn: false,
             UserInfo: {} as IUserAuthInfo,
             ChatRoom: {} as IChatRoom,
-            ChatRoomInitialized: false
+            ChatRoomInitialized: false,
+            Percentage : 0
         };
 
         //Set if the local storage has auth info
@@ -57,22 +60,44 @@ class MainChat extends React.Component<IMainChatProps, IAppState> {
         //this.setState({ UserName: userName, UserLoggedIn: true });
     }
 
+    logoutUser(e: Event) {
+        e.preventDefault();
+
+        store.remove(app.constants.userAuthInfoKey);
+        this.setState({ UserLoggedIn: false, UserInfo: {} as IUserAuthInfo });
+    }
+
+    componentDidMount() {
+        this.setState({ Percentage: 100 });
+    }
+
     render() {
+        var components;
         if (this.state.UserLoggedIn === false) {
-            return (<LoginForm initialize={this.initializeUser.bind(this) } loginUser={this.loginUser.bind(this) }/>);
-        } else if (this.state.ChatRoomInitialized == false) {
-            return (
-                <div className="block-group createroom-wrapper">
-                    <div className="block-group create-room">
-                        <ChatRoomInitialization initialize={this.initializeRoom.bind(this) } />
-                    </div>
-                    <div className="block-group list-rooms">
-                        <ListRoomSideBar/>
-                    </div>
-                </div>);
-        } else {
-            return (<ChatScreen initialize={this.initializeChatScreen}/>);
+            components = (<LoginForm initialize={this.initializeUser.bind(this) } loginUser={this.loginUser.bind(this) }/>);
         }
+        else if (this.state.ChatRoomInitialized == false) {
+            components = (<div className="block-group createroom-wrapper">
+                <div className="block">
+                    <UserInfoPanel UserInfo={this.state.UserInfo} LogOut={this.logoutUser.bind(this) }/>
+                </div>
+                <div className="block-group create-room">
+                    <ChatRoomInitialization initialize={this.initializeRoom.bind(this) } />
+                </div>
+                <div className="block-group list-rooms">
+                    <ListRoomSideBar/>
+                </div>
+            </div>);
+        } else {
+            components = (<ChatScreen initialize={this.initializeChatScreen}/>);
+        }
+
+        return (
+            <div>
+                <ProgressBar autoIncrement="true" percent={this.state.Percentage} onTop="true"/>
+                {components}
+            </div>
+        );
     }
 }
 

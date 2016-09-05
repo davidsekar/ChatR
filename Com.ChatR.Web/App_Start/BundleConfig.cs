@@ -21,7 +21,8 @@ namespace Com.ChatR.Web
                     "~/Scripts/React/react-with-addons.js",
                     "~/Scripts/React/react-dom.js",
                     "~/Scripts/external/ReactRouter.js",
-                    "~/Scripts/external/react-draggable.js"
+                    "~/Scripts/external/react-draggable.js",
+                    "~/Scripts/external/react-progress-bar-plus.js"
                 }
             ));
 
@@ -34,6 +35,7 @@ namespace Com.ChatR.Web
                     "~/Typescripts/components/ChatScreen.js",
                     "~/Typescripts/components/login.js",
                     "~/Typescripts/components/RegisterUser.js",
+                    "~/Typescripts/components/UserInfoPanel.js",
                     "~/Typescripts/components/MainChat.js",
                     "~/Typescripts/components/EntryPoint.js"
                 }

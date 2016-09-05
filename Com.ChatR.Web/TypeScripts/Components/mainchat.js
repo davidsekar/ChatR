@@ -3,6 +3,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+var ProgressBar = ReactProgressBarPlus;
 var MainChat = (function (_super) {
     __extends(MainChat, _super);
     function MainChat(props) {
@@ -11,7 +12,8 @@ var MainChat = (function (_super) {
             UserLoggedIn: false,
             UserInfo: {},
             ChatRoom: {},
-            ChatRoomInitialized: false
+            ChatRoomInitialized: false,
+            Percentage: 0
         };
         var previousAuth;
         previousAuth = store.get(app.constants.userAuthInfoKey);
@@ -53,16 +55,26 @@ var MainChat = (function (_super) {
     };
     MainChat.prototype.initializeUser = function (userName) {
     };
+    MainChat.prototype.logoutUser = function (e) {
+        e.preventDefault();
+        store.remove(app.constants.userAuthInfoKey);
+        this.setState({ UserLoggedIn: false, UserInfo: {} });
+    };
+    MainChat.prototype.componentDidMount = function () {
+        this.setState({ Percentage: 100 });
+    };
     MainChat.prototype.render = function () {
+        var components;
         if (this.state.UserLoggedIn === false) {
-            return (React.createElement(LoginForm, {initialize: this.initializeUser.bind(this), loginUser: this.loginUser.bind(this)}));
+            components = (React.createElement(LoginForm, {initialize: this.initializeUser.bind(this), loginUser: this.loginUser.bind(this)}));
         }
         else if (this.state.ChatRoomInitialized == false) {
-            return (React.createElement("div", {className: "block-group createroom-wrapper"}, React.createElement("div", {className: "block-group create-room"}, React.createElement(ChatRoomInitialization, {initialize: this.initializeRoom.bind(this)})), React.createElement("div", {className: "block-group list-rooms"}, React.createElement(ListRoomSideBar, null))));
+            components = (React.createElement("div", {className: "block-group createroom-wrapper"}, React.createElement("div", {className: "block"}, React.createElement(UserInfoPanel, {UserInfo: this.state.UserInfo, LogOut: this.logoutUser.bind(this)})), React.createElement("div", {className: "block-group create-room"}, React.createElement(ChatRoomInitialization, {initialize: this.initializeRoom.bind(this)})), React.createElement("div", {className: "block-group list-rooms"}, React.createElement(ListRoomSideBar, null))));
         }
         else {
-            return (React.createElement(ChatScreen, {initialize: this.initializeChatScreen}));
+            components = (React.createElement(ChatScreen, {initialize: this.initializeChatScreen}));
         }
+        return (React.createElement("div", null, React.createElement(ProgressBar, {autoIncrement: "true", percent: this.state.Percentage, onTop: "true"}), components));
     };
     return MainChat;
 }(React.Component));

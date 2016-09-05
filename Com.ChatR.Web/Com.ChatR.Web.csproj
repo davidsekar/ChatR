@@ -287,6 +287,7 @@
     <Content Include="Style\_variables.scss" />
     <Content Include="Style\_common.scss" />
     <Content Include="Style\_createroom.scss" />
+    <Content Include="Style\_progress-bar.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -326,6 +327,7 @@
     <TypeScriptCompile Include="TypeScripts\Components\Login.tsx" />
     <TypeScriptCompile Include="TypeScripts\Components\MainChat.tsx" />
     <TypeScriptCompile Include="TypeScripts\Components\RegisterUser.tsx" />
+    <TypeScriptCompile Include="TypeScripts\Components\UserInfoPanel.tsx" />
     <TypeScriptCompile Include="TypeScripts\constants.ts" />
   </ItemGroup>
   <ItemGroup>

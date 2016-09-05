@@ -14,7 +14,8 @@ gulp.task('CopyDep', function () {
     var depSrc = ["./node_modules/react-draggable/dist/*.*",
         "./node_modules/react-router/umd/*.*",
         "./node_modules/store/store.js",
-        "./node_modules/store/store.min.js"];
+        "./node_modules/store/store.min.js",
+        "./node_modules/react-progress-bar-plus/dist/*.js"];
 
     gulp.src(depSrc).pipe(gulp.dest("./Scripts/external"));
 });

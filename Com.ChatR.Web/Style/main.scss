@@ -1,25 +1,11 @@
 ﻿@import "variables";
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    background-color:$background-color;
-    color: $primary-color;
-    font-family:$primary-font;
-    font-weight:normal;
-    font-size:$font-base-size;
-}
-
 @import "grid";
 
 .block-group{
     padding-bottom:$default-padding;
 }
 @import "component";
+@import "progress-bar";
 @import "common";
 @import "loginform";
 @import "register";

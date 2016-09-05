@@ -6,6 +6,7 @@ interface IAppState {
     ChatRoomInitialized?: boolean;
     ChatRoom?: IChatRoom;
     UserInfo?: IUserAuthInfo;
+    Percentage?: number;
 }
 
 interface ISideBarState {
@@ -17,7 +18,8 @@ interface ILoginState {
 }
 
 interface IRegisterState {
-    ErrorMessage: string;
+    ErrorMessage?: string;
+    Percentage?: number;
 }
 
 //Component props
@@ -32,6 +34,11 @@ interface ILoginFormProps {
 
 interface IRegisterFormProps {
     initialize?: (param: any) => void;
+}
+
+interface IUserInfoPanelProps {
+    UserInfo: IUserAuthInfo;
+    LogOut: () => void;
 }
 
 //Data Member definition
@@ -63,3 +70,5 @@ interface IUserAuthInfo {
     token_type: string;
     expires_in: number;
 }
+
+interface ProgressBar { }
