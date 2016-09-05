@@ -21,7 +21,7 @@ var ChatRoomInitialization = (function (_super) {
         };
     }
     ChatRoomInitialization.prototype.render = function () {
-        return (React.createElement("div", null, React.createElement("div", null, React.createElement("div", null, "Enter Room name: ", React.createElement("input", {type: "text", "data-chatroomname": true})), React.createElement("div", null, "Private: ", React.createElement("input", {type: "checkbox", "data-isprivate": true})), React.createElement("div", null, "Secret Key: ", React.createElement("input", {type: "text", "data-secretkey": true})), React.createElement("a", {onClick: this.initializeChatRoom, href: "#"}, "Create Room!")), React.createElement(ListRoomSideBar, null)));
+        return (React.createElement("div", null, React.createElement("form", {className: "block-group"}, React.createElement("div", {className: "primary-heading"}, "Create a chat room"), React.createElement("div", {className: "block-group label"}, "Enter Room name: "), React.createElement("div", {className: "block-group field"}, React.createElement("input", {type: "text", "data-chatroomname": true})), React.createElement("div", {className: "block-group label"}, "Private: "), React.createElement("div", {className: "block-group field"}, React.createElement("input", {type: "checkbox", "data-isprivate": true})), React.createElement("div", {className: "block-group label"}, "Secret Key: "), React.createElement("div", {className: "block-group field"}, React.createElement("input", {type: "text", "data-secretkey": true})), React.createElement("div", {className: "block"}, React.createElement("a", {className: "btn", onClick: this.initializeChatRoom, href: "#"}, "Create Room!")))));
     };
     return ChatRoomInitialization;
 }(React.Component));

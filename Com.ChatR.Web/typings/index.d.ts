@@ -10,4 +10,7 @@
 /// <reference path="globals/react-addons-update/index.d.ts" />
 /// <reference path="globals/react-dom/index.d.ts" />
 /// <reference path="globals/react-global/index.d.ts" />
+/// <reference path="globals/react-router/history/index.d.ts" />
+/// <reference path="globals/react-router/index.d.ts" />
 /// <reference path="globals/react/index.d.ts" />
+/// <reference path="globals/storejs/index.d.ts" />

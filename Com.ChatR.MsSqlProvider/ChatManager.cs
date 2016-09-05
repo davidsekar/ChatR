@@ -93,5 +93,17 @@
 
             return count > 0 ? true : false;
         }
+
+        public async Task<ChatUser> Authenticate(string email)
+        {
+            var user = await _dbContext.ChatUsers.Where(u => u.Email == email).FirstOrDefaultAsync();
+            return user;
+        }
+
+        public async Task<int> CreateUser(ChatUser user)
+        {
+            _dbContext.ChatUsers.Add(user);
+            return await _dbContext.SaveChangesAsync();
+        }
     }
 }

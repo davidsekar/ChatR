@@ -16,9 +16,11 @@ namespace Com.ChatR.Web
             bundles.Add(new Bundle("~/bundles/react").Include(
                 new string[]
                 {
+                    "~/Scripts/external/store.js",
                     "~/Scripts/React/react.js",
-                    "~/Scripts/React/react-dom.js",
                     "~/Scripts/React/react-with-addons.js",
+                    "~/Scripts/React/react-dom.js",
+                    "~/Scripts/external/ReactRouter.js",
                     "~/Scripts/external/react-draggable.js"
                 }
             ));
@@ -31,6 +33,7 @@ namespace Com.ChatR.Web
                     "~/Typescripts/components/CreateUser.js",
                     "~/Typescripts/components/ChatScreen.js",
                     "~/Typescripts/components/login.js",
+                    "~/Typescripts/components/RegisterUser.js",
                     "~/Typescripts/components/MainChat.js",
                     "~/Typescripts/components/EntryPoint.js"
                 }

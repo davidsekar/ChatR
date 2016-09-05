@@ -10,6 +10,8 @@
             CreateMap<ChatRoomDto, ChatRoom>().ReverseMap();
             CreateMap<ChatParticipantDto, ChatParticipant>().ReverseMap();
             CreateMap<ChatMessageDto, ChatMessage>().ReverseMap();
+            CreateMap<ChatUserDto, ChatUser>().ReverseMap();
+            CreateMap<RegisterInfoDto, ChatUser>().ReverseMap();
         }
     }
 }

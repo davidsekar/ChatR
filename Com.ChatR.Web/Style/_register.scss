@@ -1,0 +1,7 @@
+﻿@import "variables";
+.register-wrapper{
+    margin:150px auto 0;
+    min-width:300px;
+    max-width:768px;
+    @extend .wrapper-common;
+}

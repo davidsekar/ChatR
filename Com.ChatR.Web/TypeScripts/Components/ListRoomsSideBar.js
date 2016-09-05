@@ -16,7 +16,7 @@ var ListRoomSideBar = (function (_super) {
         $.ajax({
             method: "get",
             url: "/api/rooms/all",
-            dataType: "json"
+            dataType: "json",
         }).done(function (data) {
             _this.setState({ rooms: data });
         }).fail(function (error) {
@@ -28,10 +28,10 @@ var ListRoomSideBar = (function (_super) {
     };
     ListRoomSideBar.prototype.render = function () {
         var _this = this;
-        return this.state.rooms.length > 0 ?
+        return (React.createElement("div", {className: ""}, React.createElement("div", {className: "primary-heading"}, "Rooms"), this.state.rooms.length > 0 ?
             (React.createElement("ul", null, this.state.rooms.map(function (listValue) {
                 return (React.createElement("li", {key: listValue.id}, React.createElement("a", {onClick: _this.enterRoom.bind(_this, listValue.id), href: "#"}, listValue.name)));
-            }))) : (React.createElement("div", null, "No rooms created yet"));
+            }))) : (React.createElement("div", {className: "error-message"}, "No rooms created yet"))));
     };
     return ListRoomSideBar;
 }(React.Component));

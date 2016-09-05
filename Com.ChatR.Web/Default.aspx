@@ -1,16 +1,16 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Com.ChatR.Web.Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Com.ChatR.Web.Default1" %>
 
 <!DOCTYPE html>
-<html>
-<head>
-    <title>React Chat</title>
-    <link rel="stylesheet" href="Style/main.css" />
-    <%: System.Web.Optimization.Scripts.Render("~/bundles/signalr") %>
-    <script src="signalr/hubs"></script>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
 </head>
 <body>
-    <div id="container"></div>
-    <%: System.Web.Optimization.Scripts.Render("~/bundles/react") %>
-    <%: System.Web.Optimization.Scripts.Render("~/bundles/chatr") %>    
+    <form id="form1" runat="server">
+    <div>
+    
+    </div>
+    </form>
 </body>
 </html>

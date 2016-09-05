@@ -1,26 +1,89 @@
 ﻿/// <reference path="../chatr.d.ts" />
-class RegisterUser extends React.Component<IMainChatProps, IAppState> {
+class RegisterUser extends React.Component<ILoginFormProps, IRegisterState> {
     constructor(props: IMainChatProps) {
         super(props);
+        this.state = { ErrorMessage: "" };
     }
 
-    vaildSubmission() {
-        let emailCtrl = ReactDOM.findDOMNode(this.refs["email"]) as HTMLInputElement;
-        let email = emailCtrl.value;
+    private emailComp: HTMLInputElement;
+    private nameComp: HTMLInputElement;
+    private passwordComp: HTMLInputElement;
+    private confirmPasswordComp: HTMLInputElement;
 
+    private registrationData: IRegistrationInfo;
 
+    private vaildSubmission(): boolean {
+        var email = $.trim(this.emailComp.value),
+            name = $.trim(this.nameComp.value),
+            password = $.trim(this.passwordComp.value),
+            confirmPassword = $.trim(this.confirmPasswordComp.value);
+
+        if (email === "" || name === "" || password === "" || confirmPassword === "") {
+            this.setState({ ErrorMessage: "All fields are mandatory" });
+            return false;
+        }
+        else if (password != confirmPassword) {
+            this.setState({ ErrorMessage: "Password and confirm password should match" });
+            return false;
+        }
+        else {
+            this.registrationData = {
+                email: email,
+                name: name,
+                password: password
+            };
+            this.setState({ ErrorMessage: "" });
+        }
+        return true;
+    }
+
+    submitRegistration(e: Event) {
+        e.preventDefault();
+
+        if (this.vaildSubmission()) {
+            $.ajax({
+                method: "post",
+                url: "/api/createuser",
+                data: this.registrationData,
+                dataType: "json"
+            }).done((data: ICustomResultData) => {
+                this.setState({ ErrorMessage: data.message });
+            });
+        }
     }
 
     render() {
         return (
-            <div>
-                <h1>Register new user</h1>
-                <div>Email: <input type="text" ref="email"/></div>
-                <div>User Name: <input type="text" ref="username"/></div>
-                <div>Password: <input type="password" ref="password"/></div>
-                <div>Confirm Password: <input type="password" ref="confirmpassword"/></div>
-                <a onClick={this.vaildSubmission.bind(this)} href="#">Register</a>
+            // <ReactDraggable>
+            <div className="register-wrapper">
+                <form className="block-group">
+                    <h1 className="primary-heading">Register</h1>
+                    <div className="block-group label">Email: </div>
+                    <div className="block-group field">
+                        <input autoFocus type="text" placeholder="Enter email address" ref={(c: HTMLInputElement) => { this.emailComp = c; } }/>
+                    </div>
+                    <div className="block-group label">Name: </div>
+                    <div className="block-group field">
+                        <input type="text" placeholder="Display Name" ref={(c: HTMLInputElement) => { this.nameComp = c; } }/>
+                    </div>
+                    <div className="block-group label">Password: </div>
+                    <div className="block-group field">
+                        <input type="password" placeholder="Password" ref={(c: HTMLInputElement) => { this.passwordComp = c; } }/>
+                    </div>
+                    <div className="block-group label">Confirm Password: </div>
+                    <div className="block-group field">
+                        <input type="password" placeholder="Reenter password" ref={(c: HTMLInputElement) => { this.confirmPasswordComp = c; } }/>
+                    </div>
+                    <div className="block-group error-message block">
+                        {this.state.ErrorMessage}
+                    </div>
+                    <div className="block-group">
+                        <a className="btn" onClick={this.submitRegistration.bind(this) } href="#">Register</a>
+                        <ReactRouter.Link className="btn" to="/chat/" href="#">Back to login</ReactRouter.Link>
+                    </div>
+                </form>
             </div>
+            // </ReactDraggable>
         );
     }
 }

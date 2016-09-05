@@ -1,1 +1,1 @@
-ReactDOM.render(React.createElement(MainChat, null), document.getElementById("container"));
+ReactDOM.render(React.createElement(ReactRouter.Router, {history: ReactRouter.browserHistory}, React.createElement(ReactRouter.Route, {path: "/chat/", component: MainChat}), React.createElement(ReactRouter.Route, {path: "/chat/register", component: RegisterUser})), document.getElementById("container"));

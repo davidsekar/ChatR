@@ -13,6 +13,8 @@ namespace Com.ChatR.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             app.MapSignalR();
             ConfigureContainer(app);
+            ConfigureAuthentication(app);
+            ConfigureDatabase();
         }
     }
 }

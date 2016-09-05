@@ -16,6 +16,7 @@
             _chatRHub = chatRHub;
         }
 
+        [Authorize]
         [HttpPost]
         [Route("api/createroom")]
         public async Task<IHttpActionResult> CreateRoom(ChatRoomDto room)
@@ -35,6 +36,7 @@
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route("api/rooms/all")]
         public async Task<IHttpActionResult> GetRooms()
@@ -53,6 +55,8 @@
                 return InternalServerError(ex);
             }
         }
+
+        [Authorize]
         [HttpGet]
         [Route("api/rooms/{0}/{1}")]
         public async Task<IHttpActionResult> GetRoomsPaged(int pageNo, int pageSize)
@@ -67,6 +71,8 @@
                 return InternalServerError(ex);
             }
         }
+
+        [Authorize]
         [HttpPost]
         [Route("api/participant/create")]
         public async Task<IHttpActionResult> GetNewParticipant(ChatParticipantDto participant)

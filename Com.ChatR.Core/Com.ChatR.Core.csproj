@@ -56,6 +56,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\ChatUserDto.cs" />
+    <Compile Include="Dtos\RegisterInfoDto.cs" />
     <Compile Include="UserAccountManager.cs" />
     <Compile Include="ChatManager.cs" />
     <Compile Include="ChatRHub.cs" />

@@ -1,6 +1,5 @@
 ﻿/// <reference path="../chatr.d.ts" />
-var ReactDraggable: any;
-var Draggable = ReactDraggable;
+// var ReactDraggable: any;
 class LoginForm extends React.Component<ILoginFormProps, ILoginState> {
 
     constructor(props: IMainChatProps) {
@@ -12,15 +11,19 @@ class LoginForm extends React.Component<ILoginFormProps, ILoginState> {
     private passwordComp: HTMLInputElement;
 
     login(e: Event) {
-        var email = this.emailComp.value;
-        var password = this.passwordComp.value;
+        e.preventDefault();
 
-        if ($.trim(email) === "" || $.trim(password) === "") {
-            this.setState({ ErrorMessage: "username or password can not be blank." });
+        var email = $.trim(this.emailComp.value);
+        var password = $.trim(this.passwordComp.value);
+
+        if (email === "" || password === "") {
+            this.setState({ ErrorMessage: "Email or Password can not be blank." });
+            return;
         } else {
             this.setState({ ErrorMessage: "" });
         }
-        e.preventDefault();
+
+        this.props.loginUser(email, password);
     }
 
     clearForm(e: Event) {
@@ -32,20 +35,27 @@ class LoginForm extends React.Component<ILoginFormProps, ILoginState> {
 
     render() {
         return (
-            <Draggable>
-                <div className="login-wrapper">
-                    <form className="block-group">
-                        <div className="block-group label">UserName: </div>
-                        <div className="block-group field"><input type="text" ref={(c: HTMLInputElement) => { this.emailComp = c; } }/></div>
-                        <div className="block-group label">Password: </div>
-                        <div className="block-group field"><input type="text" ref={(c: HTMLInputElement) => { this.passwordComp = c; } }/></div>
-                        <div className="error-message">{this.state.ErrorMessage}</div>
+            // <ReactDraggable>
+            <div className="login-wrapper">
+                <form className="block-group">
+                    <div className="primary-heading">Login</div>
+                    <div className="block-group label">Email: </div>
+                    <div className="block-group field">
+                        <input autoFocus placeholder="Email" type="text" ref={(c: HTMLInputElement) => { this.emailComp = c; } }/>
+                    </div>
+                    <div className="block-group label">Password: </div>
+                    <div className="block-group field">
+                        <input type="password" placeholder="Password" ref={(c: HTMLInputElement) => { this.passwordComp = c; } }/>
+                    </div>
+                    <div className="block-group error-message block">{this.state.ErrorMessage}</div>
+                    <div className="block-group">
                         <a className="btn" href="#" onClick={this.login.bind(this) }>Login</a>
-                        <a className="btn" onClick={this.clearForm.bind(this) } href="#">Clear</a> OR 
-                        <a className="btn" href="#">Register</a>
-                    </form>
-                </div>
-            </Draggable >
+                        <a className="btn" onClick={this.clearForm.bind(this) } href="#">Clear</a> OR
+                        <ReactRouter.Link className="btn" to="/chat/register">Register</ReactRouter.Link>
+                    </div>
+                </form>
+            </div >
+            // </ReactDraggable>
         );
     }
 }

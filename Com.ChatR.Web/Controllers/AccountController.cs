@@ -1,8 +1,11 @@
-﻿using Com.ChatR.Core;
-using System.Web.Http;
-
-namespace Com.ChatR.Web.Controllers
+﻿namespace Com.ChatR.Web.Controllers
 {
+    using ChatR.Models;
+    using Core;
+    using Core.Dtos;
+    using System.Threading.Tasks;
+    using System.Web.Http;
+
     public class AccountController : ApiController
     {
         private readonly UserAccountManager _userAccountManager;
@@ -13,11 +16,16 @@ namespace Com.ChatR.Web.Controllers
             _chatRHub = chatRHub;
         }
 
-        //[Route("api/authenticate")]
-        //public async Task<string> Authenticate()
-        //{
-        //    _userAccountManager.a
-        //    return "";
-        //}
+        [Route("api/authenticate")]
+        public async Task<ChatUserDto> Authenticate(string email, string password)
+        {
+            return await _userAccountManager.Authenticate(email, password);
+        }
+
+        [Route("api/createuser")]
+        public async Task<CustomResult> RegisterUser(RegisterInfoDto registerInfo)
+        {
+            return await _userAccountManager.RegisterUser(registerInfo);
+        }
     }
 }

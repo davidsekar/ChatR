@@ -1,0 +1,20 @@
+﻿@import "variables";
+
+.createroom-wrapper {
+    @extend .wrapper-common;
+
+    .create-room {
+        @media(min-width:$screen-sm-min) {
+            width: 75%;
+            padding-right:$default-padding;
+        }
+    }
+
+    .list-rooms {
+        @media(min-width:$screen-sm-min) {
+            width: 25%;
+            border-left:1px solid $border-primary;
+            padding-left:$default-padding;
+        }
+    }
+}

@@ -11,7 +11,10 @@ var plumber = require('gulp-plumber');
 var notify = require("gulp-notify");
 
 gulp.task('CopyDep', function () {
-    var depSrc = ["./node_modules/react-draggable/dist/*.*"];
+    var depSrc = ["./node_modules/react-draggable/dist/*.*",
+        "./node_modules/react-router/umd/*.*",
+        "./node_modules/store/store.js",
+        "./node_modules/store/store.min.js"];
 
     gulp.src(depSrc).pipe(gulp.dest("./Scripts/external"));
 });

@@ -1,23 +1,24 @@
-﻿using Autofac;
-using Autofac.Integration.Mvc;
-using Autofac.Integration.SignalR;
-using Autofac.Integration.WebApi;
-using AutoMapper;
-using Com.ChatR.Core;
-using Com.ChatR.MsSqlProvider;
-using Com.ChatR.Repository;
-using Microsoft.AspNet.SignalR;
-using Newtonsoft.Json.Serialization;
-using Owin;
-using System;
-using System.Linq;
-using System.Net.Http.Formatting;
-using System.Reflection;
-using System.Web.Http;
-using System.Web.Mvc;
-
-namespace Com.ChatR.Web
+﻿namespace Com.ChatR.Web
 {
+    using Autofac;
+    using Autofac.Integration.Mvc;
+    using Autofac.Integration.SignalR;
+    using Autofac.Integration.WebApi;
+    using AutoMapper;
+    using Core;
+    using Microsoft.AspNet.SignalR;
+    using MsSqlProvider;
+    using Newtonsoft.Json.Serialization;
+    using Owin;
+    using Providers;
+    using Repository;
+    using System;
+    using System.Linq;
+    using System.Net.Http.Formatting;
+    using System.Reflection;
+    using System.Web.Http;
+    using System.Web.Mvc;
+
     public partial class Startup
     {
         public static void ConfigureContainer(IAppBuilder app)
@@ -82,6 +83,10 @@ namespace Com.ChatR.Web
             builder.RegisterType<ChatManager>().AsSelf().InstancePerRequest();
             builder.RegisterType<ChatModel>().AsSelf().InstancePerRequest();
             builder.RegisterType<UserAccountManager>().AsSelf().InstancePerRequest();
+            builder.RegisterType<PasswordStorage>().AsSelf().InstancePerRequest();
+            builder.RegisterType<CustomOAuthProvider>().AsSelf()
+                .PropertiesAutowired() // to automatically resolve required constructor
+                .InstancePerRequest();
         }
 
         private static void RegisterServices(ContainerBuilder builder)

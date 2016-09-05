@@ -19,5 +19,7 @@
         Task<bool> IsNameTaken(string name);
         Task<ChatRoom> JoinChatRoom(ChatParticipant participant);
         Task<ChatRoom> GetChatRoomById(Guid roomId);
+        Task<ChatUser> Authenticate(string email);
+        Task<int> CreateUser(ChatUser user);
     }
 }

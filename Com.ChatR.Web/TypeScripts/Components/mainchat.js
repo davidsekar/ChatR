@@ -9,30 +9,41 @@ var MainChat = (function (_super) {
         _super.call(this, props);
         this.state = {
             UserLoggedIn: false,
-            userInfo: {},
-            UserName: "",
+            UserInfo: {},
             ChatRoom: {},
             ChatRoomInitialized: false
         };
+        var previousAuth;
+        previousAuth = store.get(app.constants.userAuthInfoKey);
+        if (previousAuth) {
+            this.state.UserInfo = previousAuth;
+            this.state.UserLoggedIn = true;
+        }
     }
-    MainChat.prototype.loginUser = function () {
+    MainChat.prototype.loginUser = function (userName, password) {
         var _this = this;
+        var data = "grant_type=password&username=" + userName + "&password=" + password;
         $.ajax({
             method: "post",
-            url: "./api/loginUser",
-            data: {},
-            dataType: "json"
+            url: "/oauth/token",
+            data: data,
+            dataType: "json",
+            contentType: "application/x-www-form-urlencoded"
         }).done(function (data) {
-            _this.setState({ UserLoggedIn: true, ChatRoom: data });
+            _this.setState({ UserLoggedIn: true, UserInfo: data });
+            store.set(app.constants.userAuthInfoKey, data);
         });
     };
     MainChat.prototype.initializeRoom = function (room) {
         var _this = this;
         $.ajax({
             method: "post",
-            url: "./api/createRoom",
+            url: "/api/createRoom",
             data: room,
-            dataType: "json"
+            dataType: "json",
+            headers: {
+                "Authorization": this.state.UserInfo.token_type + " " + this.state.UserInfo.access_token
+            }
         }).done(function (data) {
             _this.setState({ ChatRoomInitialized: true, ChatRoom: data });
         });
@@ -41,14 +52,13 @@ var MainChat = (function (_super) {
         alert("start chat");
     };
     MainChat.prototype.initializeUser = function (userName) {
-        this.setState({ UserName: userName, UserLoggedIn: true });
     };
     MainChat.prototype.render = function () {
         if (this.state.UserLoggedIn === false) {
             return (React.createElement(LoginForm, {initialize: this.initializeUser.bind(this), loginUser: this.loginUser.bind(this)}));
         }
         else if (this.state.ChatRoomInitialized == false) {
-            return (React.createElement(ChatRoomInitialization, {initialize: this.initializeRoom.bind(this)}));
+            return (React.createElement("div", {className: "block-group createroom-wrapper"}, React.createElement("div", {className: "block-group create-room"}, React.createElement(ChatRoomInitialization, {initialize: this.initializeRoom.bind(this)})), React.createElement("div", {className: "block-group list-rooms"}, React.createElement(ListRoomSideBar, null))));
         }
         else {
             return (React.createElement(ChatScreen, {initialize: this.initializeChatScreen}));

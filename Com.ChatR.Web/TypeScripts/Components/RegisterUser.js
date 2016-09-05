@@ -7,13 +7,45 @@ var RegisterUser = (function (_super) {
     __extends(RegisterUser, _super);
     function RegisterUser(props) {
         _super.call(this, props);
+        this.state = { ErrorMessage: "" };
     }
     RegisterUser.prototype.vaildSubmission = function () {
-        var emailCtrl = ReactDOM.findDOMNode(this.refs["email"]);
-        var email = emailCtrl.value;
+        var email = $.trim(this.emailComp.value), name = $.trim(this.nameComp.value), password = $.trim(this.passwordComp.value), confirmPassword = $.trim(this.confirmPasswordComp.value);
+        if (email === "" || name === "" || password === "" || confirmPassword === "") {
+            this.setState({ ErrorMessage: "All fields are mandatory" });
+            return false;
+        }
+        else if (password != confirmPassword) {
+            this.setState({ ErrorMessage: "Password and confirm password should match" });
+            return false;
+        }
+        else {
+            this.registrationData = {
+                email: email,
+                name: name,
+                password: password
+            };
+            this.setState({ ErrorMessage: "" });
+        }
+        return true;
+    };
+    RegisterUser.prototype.submitRegistration = function (e) {
+        var _this = this;
+        e.preventDefault();
+        if (this.vaildSubmission()) {
+            $.ajax({
+                method: "post",
+                url: "/api/createuser",
+                data: this.registrationData,
+                dataType: "json"
+            }).done(function (data) {
+                _this.setState({ ErrorMessage: data.message });
+            });
+        }
     };
     RegisterUser.prototype.render = function () {
-        return (React.createElement("div", null, React.createElement("h1", null, "Register new user"), React.createElement("div", null, "Email: ", React.createElement("input", {type: "text", ref: "email"})), React.createElement("div", null, "User Name: ", React.createElement("input", {type: "text", ref: "username"})), React.createElement("div", null, "Password: ", React.createElement("input", {type: "password", ref: "password"})), React.createElement("div", null, "Confirm Password: ", React.createElement("input", {type: "password", ref: "confirmpassword"})), React.createElement("a", {onClick: this.vaildSubmission.bind(this), href: "#"}, "Register")));
+        var _this = this;
+        return (React.createElement("div", {className: "register-wrapper"}, React.createElement("form", {className: "block-group"}, React.createElement("h1", {className: "primary-heading"}, "Register"), React.createElement("div", {className: "block-group label"}, "Email: "), React.createElement("div", {className: "block-group field"}, React.createElement("input", {autoFocus: true, type: "text", placeholder: "Enter email address", ref: function (c) { _this.emailComp = c; }})), React.createElement("div", {className: "block-group label"}, "Name: "), React.createElement("div", {className: "block-group field"}, React.createElement("input", {type: "text", placeholder: "Display Name", ref: function (c) { _this.nameComp = c; }})), React.createElement("div", {className: "block-group label"}, "Password: "), React.createElement("div", {className: "block-group field"}, React.createElement("input", {type: "password", placeholder: "Password", ref: function (c) { _this.passwordComp = c; }})), React.createElement("div", {className: "block-group label"}, "Confirm Password: "), React.createElement("div", {className: "block-group field"}, React.createElement("input", {type: "password", placeholder: "Reenter password", ref: function (c) { _this.confirmPasswordComp = c; }})), React.createElement("div", {className: "block-group error-message block"}, this.state.ErrorMessage), React.createElement("div", {className: "block-group"}, React.createElement("a", {className: "btn", onClick: this.submitRegistration.bind(this), href: "#"}, "Register"), React.createElement(ReactRouter.Link, {className: "btn", to: "/chat/", href: "#"}, "Back to login")))));
     };
     return RegisterUser;
 }(React.Component));

@@ -15,14 +15,20 @@ class ChatRoomInitialization extends React.Component<IMainChatProps, IAppState> 
         this.props.initialize(roomInfo);
     };
     render() {
-        return (<div>
+        return (
             <div>
-                <div>Enter Room name: <input type="text" data-chatroomname /></div>
-                <div>Private: <input type="checkbox" data-isprivate/></div>
-                <div>Secret Key: <input type="text" data-secretkey/></div>
-                <a onClick={this.initializeChatRoom} href="#">Create Room!</a>
-            </div>
-            <ListRoomSideBar/>
-        </div>);
+                <form className="block-group">
+                    <div className="primary-heading">Create a chat room</div>
+                    <div className="block-group label">Enter Room name: </div>
+                    <div className="block-group field"><input type="text" data-chatroomname /></div>
+                    <div className="block-group label">Private: </div>
+                    <div className="block-group field"><input type="checkbox" data-isprivate/></div>
+                    <div className="block-group label">Secret Key: </div>
+                    <div className="block-group field"><input type="text" data-secretkey/></div>
+                    <div className="block">
+                        <a className="btn" onClick={this.initializeChatRoom} href="#">Create Room!</a>
+                    </div>
+                </form>
+            </div>);
     }
 }
