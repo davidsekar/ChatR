@@ -72,3 +72,6 @@ interface IUserAuthInfo {
 }
 
 interface ProgressBar { }
+
+//Components with no official type definition
+declare var ReactProgressBarPlus: any;

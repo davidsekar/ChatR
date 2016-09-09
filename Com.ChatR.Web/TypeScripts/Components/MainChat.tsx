@@ -1,6 +1,6 @@
 ﻿/// <reference path="createroom.tsx" />
 
-var ProgressBar = ReactProgressBarPlus as any;
+var ProgressBar = ReactProgressBarPlus;
 
 class MainChat extends React.Component<IMainChatProps, IAppState> {
     constructor(props: IMainChatProps) {
@@ -14,7 +14,7 @@ class MainChat extends React.Component<IMainChatProps, IAppState> {
             Percentage : 0
         };
 
-        //Set if the local storage has auth info
+        // set if the local storage has auth info
         var previousAuth: IUserAuthInfo;
         previousAuth = store.get(app.constants.userAuthInfoKey);
         if (previousAuth) {
@@ -23,7 +23,7 @@ class MainChat extends React.Component<IMainChatProps, IAppState> {
         }
     }
 
-    //Login Methods
+    // login Methods
     loginUser(userName: string, password: string) {
         var data = "grant_type=password&username=" + userName + "&password=" + password;
         $.ajax({
@@ -57,7 +57,7 @@ class MainChat extends React.Component<IMainChatProps, IAppState> {
     }
 
     initializeUser(userName: string) {
-        //this.setState({ UserName: userName, UserLoggedIn: true });
+        // this.setState({ UserName: userName, UserLoggedIn: true });
     }
 
     logoutUser(e: Event) {
@@ -75,8 +75,7 @@ class MainChat extends React.Component<IMainChatProps, IAppState> {
         var components;
         if (this.state.UserLoggedIn === false) {
             components = (<LoginForm initialize={this.initializeUser.bind(this) } loginUser={this.loginUser.bind(this) }/>);
-        }
-        else if (this.state.ChatRoomInitialized == false) {
+        } else if (this.state.ChatRoomInitialized === false) {
             components = (<div className="block-group createroom-wrapper">
                 <div className="block">
                     <UserInfoPanel UserInfo={this.state.UserInfo} LogOut={this.logoutUser.bind(this) }/>

@@ -68,7 +68,7 @@ var MainChat = (function (_super) {
         if (this.state.UserLoggedIn === false) {
             components = (React.createElement(LoginForm, {initialize: this.initializeUser.bind(this), loginUser: this.loginUser.bind(this)}));
         }
-        else if (this.state.ChatRoomInitialized == false) {
+        else if (this.state.ChatRoomInitialized === false) {
             components = (React.createElement("div", {className: "block-group createroom-wrapper"}, React.createElement("div", {className: "block"}, React.createElement(UserInfoPanel, {UserInfo: this.state.UserInfo, LogOut: this.logoutUser.bind(this)})), React.createElement("div", {className: "block-group create-room"}, React.createElement(ChatRoomInitialization, {initialize: this.initializeRoom.bind(this)})), React.createElement("div", {className: "block-group list-rooms"}, React.createElement(ListRoomSideBar, null))));
         }
         else {
