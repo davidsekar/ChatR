@@ -1,4 +1,5 @@
-﻿'use strict';
+﻿/// <binding BeforeBuild='build' />
+'use strict';
 
 var sassPath = "./style/**/*.scss";
 var cssPath = "./style";
@@ -34,3 +35,6 @@ gulp.task('sass', function () {
 gulp.task('watch', function () {
     gulp.watch(sassPath, ['sass']);
 });
+
+gulp.task('default', ['watch']);
+gulp.task('build', ['CopyDep', 'sass']);
